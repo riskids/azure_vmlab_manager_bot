@@ -1,1 +1,1 @@
-# azure_vmlab_managet_bot
+# azure_vmlab_manager_bot
