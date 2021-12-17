@@ -20,7 +20,6 @@ import csv
 from faker import Faker
 from faker.providers import person
 import random
-import string
 from time import sleep as wait
 import sys
 from pyvirtualdisplay import Display
@@ -34,8 +33,6 @@ from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 from colorama import Fore, Back, Style 
 from colorama import init
 init()
-
-acToken = "f01adfb276c573b84d2f206685c22a38"
 
 def login_labs(email,passwd,empas):
     try:
