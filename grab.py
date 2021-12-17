@@ -137,7 +137,7 @@ def is_locked(timeout=5):
 
 def is_visible_switch(timeout=120):
     try:
-        ui.WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.CLASS_NAME, "ms-Toggle-background"))) 
+        ui.WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.CLASS_NAME, "ms-Toggle-background"))) 
         return True
     except TimeoutException:
         return False
