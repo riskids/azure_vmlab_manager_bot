@@ -69,7 +69,7 @@ def login_labs(email,passwd,empas):
        #     }
         
         print("use user-agent: ", UserAgent().random)
-        driver = webdriver.Firefox(executable_path='../drivers/geckodriver',firefox_profile=profile) 
+        driver = webdriver.Firefox(executable_path='drivers/geckodriver',firefox_profile=profile) 
         driver.get(invite_url)
         if is_visible("i0116",90) is True:
            pass
